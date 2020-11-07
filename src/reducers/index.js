@@ -10,5 +10,5 @@ const queriesReducer = (state = [], action) => {
 };
 
 export default combineReducers({
-    queries: queriesReducer
+    pictures: queriesReducer
 });

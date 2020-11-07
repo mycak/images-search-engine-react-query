@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ListStyles = styled.ul`
+  z-index: 2;
   padding: 0;
   background-color: #fff;
   border-radius: 4px;
@@ -28,12 +29,7 @@ const SuggestionsList = ({inputValue, showSuggestions, filteredSuggestions, onCl
     if (filteredSuggestions.length) {
       return (
         <ListStyles>
-          {filteredSuggestions.map((suggestion, index) => {
-            // let className;
-            // // Flag the active suggestion with a class
-            // if (index === activeSuggestion) {
-            //   className = "suggestion-active";
-            // }
+          {filteredSuggestions.map(suggestion => {
             return (
               <li key={suggestion} onClick={onClick}>
                 {suggestion}

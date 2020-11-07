@@ -10,6 +10,7 @@ const FormStyles = styled.form`
   height: 100%;
   input[type=text] {
     box-sizing:border-box;
+    padding: 5px;
     width: 100%;
     height: 100%;
     border-radius: 4px;
@@ -18,7 +19,6 @@ const FormStyles = styled.form`
 `
 
 const SearchBar = (props) => {
-  // const [activeSuggestion, setActiveSuggestion] = useState(0);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [inputValue, setInputValue] = useState('');
@@ -43,23 +43,18 @@ const SearchBar = (props) => {
 
   const onChange = e => {
     const input = e.target.value;
-    // Fetch data
-    if(input.length >= 3){
-      props.fetchQueries(input);
-    }
-    // Filter our suggestions that don't contain the user's input
+
     const filteredSuggestions = suggestions.filter(
-      suggestion =>
+       suggestion =>
         suggestion.toLowerCase().indexOf(input.toLowerCase()) > -1
     );
-    // setActiveSuggestion(0);
+
     setFilteredSuggestions(filteredSuggestions)
     setShowSuggestions(true);
-    setInputValue(e.target.value);
+    setInputValue(input);
   };
 
   const onClick = e => {
-    // setActiveSuggestion(0);
     setFilteredSuggestions([]);
     setShowSuggestions(false)
     setInputValue(e.currentTarget.innerText);

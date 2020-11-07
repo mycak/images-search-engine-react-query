@@ -13,7 +13,7 @@ const SiteContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  .searchbar--container {
+  .searchBar--container {
     transform: translateY(-300%);
     width: 40vw;
     height: 6vh;
@@ -22,7 +22,7 @@ const SiteContainer = styled.div`
 const MainSite = () => {
   return (
     <SiteContainer>
-      <div className="searchbar--container">
+      <div className="searchBar--container">
         <SearchBar />
       </div>
     </SiteContainer>

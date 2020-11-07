@@ -17,10 +17,6 @@ export const fetchQueries = (term) => async dispatch => {
   //     listTags.push(...descrptionWords)
   //   }
   // })
-
-  // console.log(listTags)
-
-
   dispatch ({ type: 'FETCH_QUERIES', payload: response.data.results });
   // dispatch ({ type: 'FETCH_TAGS', payload: listTags });
 };
