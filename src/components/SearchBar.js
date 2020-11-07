@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import history from  '../history';
 import { fetchQueries } from '../actions'
 import { connect } from 'react-redux';
-import history from  '../history';
+import SuggestionsList from './SuggestionList';
 
 const FormStyles = styled.form`
   width: 100%;
@@ -15,21 +16,54 @@ const FormStyles = styled.form`
     border: none;
   }
 `
+
 const SearchBar = (props) => {
+  // const [activeSuggestion, setActiveSuggestion] = useState(0);
+  const [filteredSuggestions, setFilteredSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
-  useEffect(() => {
-    if(inputValue.length >= 3){
-      props.fetchQueries(inputValue);
-    }
-  }, [inputValue, props])
+  const suggestions = [
+    "Alligator",
+    "allin",
+    "Bask",
+    "Crocodilian",
+    "Death Roll",
+    "Eggs",
+    "Jaws",
+    "Reptile",
+    "Solitary",
+    "Tail",
+    "Wetlands"
+  ];
 
-  const onChange = e => {
-    setInputValue(e.target.value);
-  }
   const onSubmit = e => {
     history.push(`/pictures/${inputValue}`);
   }
+
+  const onChange = e => {
+    const input = e.target.value;
+    // Fetch data
+    if(input.length >= 3){
+      props.fetchQueries(input);
+    }
+    // Filter our suggestions that don't contain the user's input
+    const filteredSuggestions = suggestions.filter(
+      suggestion =>
+        suggestion.toLowerCase().indexOf(input.toLowerCase()) > -1
+    );
+    // setActiveSuggestion(0);
+    setFilteredSuggestions(filteredSuggestions)
+    setShowSuggestions(true);
+    setInputValue(e.target.value);
+  };
+
+  const onClick = e => {
+    // setActiveSuggestion(0);
+    setFilteredSuggestions([]);
+    setShowSuggestions(false)
+    setInputValue(e.currentTarget.innerText);
+  };
 
   return (
     <FormStyles onSubmit={onSubmit}>
@@ -38,6 +72,12 @@ const SearchBar = (props) => {
         value={inputValue}
         onChange={onChange}
         placeholder={'Search for images !'}
+      />
+      <SuggestionsList
+        inputValue={inputValue}
+        showSuggestions={showSuggestions}
+        filteredSuggestions={filteredSuggestions}
+        onClick={onClick}
       />
     </FormStyles>
   );
