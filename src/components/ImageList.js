@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import history from  '../history';
 
 const ImageListStyles = styled.div`
 
@@ -18,14 +19,19 @@ const ImageListStyles = styled.div`
 `
 
 const ImageList = ({imageData}) => {
+  const onClick= (data) => {
+    history.push(`/pictures/show/${data}`);
+  }
 
   if (imageData) {
     return (
       <ImageListStyles>
         {Object.keys(imageData).map((key, i) => {
+          console.log(imageData[key])
           return (
             <div className="picture--container" key={i}>
               <img
+              onClick={() => onClick(imageData[key].id)}
               alt={imageData[key].alt_description}
               src={imageData[key].urls.regular}
               />
@@ -36,16 +42,9 @@ const ImageList = ({imageData}) => {
     );
   } else {
     return (
-      <div>Loading...</div>
+      <div>Any results...</div>
     )
   }
 };
-
-// const mapStateToProps = (state, ownProps) => {
-//   return {
-//       query: ownProps.match.params.id,
-//       pictures: state.pictures
-//   }
-// }
 
 export default ImageList;

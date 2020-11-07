@@ -8,7 +8,16 @@ const queriesReducer = (state = [], action) => {
             return state
     }
 };
+const currentPictureReducer = (state = [], action) => {
+    switch(action.type) {
+        case 'CHANGE_CURRENT_PICTURE':
+            return {...action.payload};
+        default:
+            return state
+    }
+}
 
 export default combineReducers({
-    pictures: queriesReducer
+    pictures: queriesReducer,
+    currentPicture: currentPictureReducer
 });

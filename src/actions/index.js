@@ -20,3 +20,10 @@ export const fetchQueries = (term) => async dispatch => {
   dispatch ({ type: 'FETCH_QUERIES', payload: response.data.results });
   // dispatch ({ type: 'FETCH_TAGS', payload: listTags });
 };
+
+export const changeCurrentPicture = (data) => {
+  return {
+    type: 'CHANGE_CURRENT_PICTURE',
+    payload: data
+  }
+}

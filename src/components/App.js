@@ -1,9 +1,10 @@
 import React from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
+import history from '../history';
 
 import ListImagesSite from '../pages/ListImagesSite';
-import history from '../history';
 import MainSite from '../pages/MainSite';
+import ImageSite from '../pages/ImageSite'
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={MainSite} />
         <Route exact path="/pictures/:query" component={ListImagesSite} />
+        <Route exact path="/pictures/show/:query" component={ImageSite} />
       </Switch>
     </Router>
   );
