@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import history from  '../history';
+import { fetchQueries } from '../actions'
+import { connect } from 'react-redux';
 import SuggestionsList from './SuggestionList';
 import { countryList } from '../suggestionslist'
 
@@ -17,7 +19,7 @@ const FormStyles = styled.form`
   }
 `
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [inputValue, setInputValue] = useState('');
@@ -49,34 +51,36 @@ const SearchBar = () => {
     setInputValue(e.currentTarget.innerText);
   };
 
-  const onKeyDown = e => {
-    // Enter
-    if (e.keyCode === 13) {
-      setActiveSuggestion(0);
-      setShowSuggestions(false);
-      setInputValue(filteredSuggestions[activeSuggestion]);
-    }
-    // Up
-    else if (e.keyCode === 38) {
-      if (activeSuggestion === 0) {
-        return;
-      }
-      setActiveSuggestion(activeSuggestion - 1);
-    }
-    // Down
-    else if (e.keyCode === 40) {
-      if (activeSuggestion - 1 === filteredSuggestions.length) {
-        return;
-      }
-      setActiveSuggestion(activeSuggestion + 1);
-    }
-  };
+  // const onKeyDown = e => {
+  //   // Enter
+  //   if (e.keyCode === 13) {
+  //     setActiveSuggestion(0);
+  //     setShowSuggestions(false);
+  //     setInputValue(filteredSuggestions[activeSuggestion]);
+  //   }
+  //   // Up
+  //   else if (e.keyCode === 38) {
+  //     if (activeSuggestion === 0) {
+  //       return;
+  //     }
+  //     setActiveSuggestion(activeSuggestion - 1);
+  //   }
+
+  //   // Down
+  //   else if (e.keyCode === 40) {
+  //     if (activeSuggestion - 1 === filteredSuggestions.length) {
+  //       return;
+  //     }
+
+  //     setActiveSuggestion(activeSuggestion + 1);
+  //   }
+  // };
 
   return (
     <FormStyles onSubmit={onSubmit}>
       <input
         type="text"
-        onKeyDown={onKeyDown}
+        // onKeyDown={onKeyDown}
         value={inputValue}
         onChange={onChange}
         placeholder={'Search for images !'}
@@ -92,4 +96,10 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+const mapStateToProps = (state) => {
+  return {
+      pictures: state
+  }
+}
+
+export default connect(mapStateToProps, {fetchQueries})(SearchBar);

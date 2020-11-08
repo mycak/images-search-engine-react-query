@@ -5,9 +5,7 @@ import history from '../history';
 import ListImagesSite from '../pages/ListImagesSite';
 import MainSite from '../pages/MainSite';
 import ImageSite from '../pages/ImageSite'
-console.log(process.env.API_KEY)
 const App = () => {
-  
   return (
     <Router history={history}>
       <Switch>
