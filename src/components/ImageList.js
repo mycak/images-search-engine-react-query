@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import { fetchCurrentPicture } from '../actions';
 
 const ImageListStyles = styled.div`
-  width: 100%;
+  margin: auto;
+  width: 95%;
   display: grid;
   justify-items: center;
+  align-items: center;
   gap: 2rem;
-  grid-template-columns: repeat(2, minmax(auto, 1fr));
+  grid-template-columns: repeat(3, minmax(auto, 1fr));
   .picture--container{
     max-width: 35vw;
   }

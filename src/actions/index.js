@@ -12,5 +12,4 @@ export const fetchPictures = (term) => async dispatch => {
 export const fetchCurrentPicture = (id) => async dispatch => {
   const response = await unsplash.get(`/photos/${id}`);
   dispatch ({ type: 'FETCH_CURRENT_PICTURE', payload: response.data });
-  history.push(`/pictures/show/${id}`);
 };

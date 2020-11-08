@@ -41,10 +41,13 @@ const SearchBar = ({fetchPictures}) => {
   };
 
   const onClick = e => {
-    setActiveSuggestion(0)
-    setFilteredSuggestions([]);
-    setShowSuggestions(false)
-    setInputValue(e.currentTarget.innerText);
+    console.log(e.currentTarget.innerText)
+    // setActiveSuggestion(0)
+    // setFilteredSuggestions([]);
+    // setShowSuggestions(false)
+    // setInputValue(e.currentTarget.innerText);
+    e.preventDefault();
+    fetchPictures(e.currentTarget.innerText);
   };
 
   const onKeyDown = e => {
