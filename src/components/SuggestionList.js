@@ -24,13 +24,12 @@ const ListStyles = styled.ul`
 `
 
 const SuggestionsList = ({inputValue, showSuggestions, filteredSuggestions, onClick, activeSuggestion}) => {
-
-  if (showSuggestions && inputValue.length > 2) {
+  if (showSuggestions && inputValue.length > 2 && inputValue !== filteredSuggestions[0]) {
     if (filteredSuggestions.length) {
       return (
         <ListStyles>
-          {filteredSuggestions.slice(0,5).map((suggestion, i) => {
-            const isActive = i === activeSuggestion ?'active':'';
+          {filteredSuggestions.slice(0,4).map((suggestion, i) => {
+            const isActive = (i+1) === activeSuggestion ?'active':'';
             return (
               <li key={suggestion} onClick={onClick} className={isActive}>
                 {suggestion}

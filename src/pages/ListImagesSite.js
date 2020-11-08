@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import SearchBar from '../components/SearchBar';
 import ImageList from '../components/ImageList';
 import { connect } from 'react-redux';
-import { fetchQueries } from '../actions';
+import { fetchPictures, fetchCurrentPicture } from '../actions';
 
 const ListSiteWrapper = styled.div `
   min-height: 100vh;
@@ -35,16 +35,12 @@ const SearchBarSectionStyles = styled.div`
   }
 `
 
-const ListImagesSite = ({ query, pictures, fetchQueries }) => {
-  useEffect(()=> {
-    fetchQueries(query);
-  },[])
-
+const ListImagesSite = ({ query, pictures, fetchPictures }) => {
   return (
     <ListSiteWrapper>
       <SearchBarSectionStyles>
         <div className="searchBar--container">
-          <SearchBar />
+          <SearchBar fetchPictures={fetchPictures} />
         </div>
       </SearchBarSectionStyles>
       <div className="section--pictures">
@@ -61,4 +57,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchQueries })(ListImagesSite);
+export default connect(mapStateToProps, { fetchPictures, fetchCurrentPicture })(ListImagesSite);

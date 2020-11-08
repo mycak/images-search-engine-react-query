@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
@@ -10,10 +10,6 @@ const ModalStyles = styled.div`
 `
 
 const ImageSite = ({id, imageData, fetchCurrentPicture}) => {
-
-  useEffect(()=>{
-    fetchCurrentPicture(id)
-  },[])
 
   return ReactDOM.createPortal(
     <ModalStyles>

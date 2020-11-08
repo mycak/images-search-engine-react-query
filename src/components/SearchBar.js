@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import history from  '../history';
-import { fetchQueries } from '../actions'
-import { connect } from 'react-redux';
 import SuggestionsList from './SuggestionList';
 import { countryList } from '../suggestionslist'
 
 const FormStyles = styled.form`
   width: 100%;
   height: 100%;
-  input[type=text] {
+  input[type=search] {
     box-sizing:border-box;
     padding: 5px;
     width: 100%;
@@ -19,26 +16,25 @@ const FormStyles = styled.form`
   }
 `
 
-const SearchBar = (props) => {
+const SearchBar = ({fetchPictures}) => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [activeSuggestion, setActiveSuggestion] = useState(0);
-  const suggestions = countryList;
+  const suggestions = countryList.map(item => item.toLocaleLowerCase());
 
-  const onSubmit = e => {
-    history.push(`/pictures/${inputValue}`);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    fetchPictures(inputValue);
   }
 
   const onChange = e => {
     setActiveSuggestion(0);
-    const input = e.target.value;
-
+    const input = e.target.value.toLowerCase();
     const filteredSuggestions = suggestions.filter(
        suggestion =>
-        suggestion.toLowerCase().indexOf(input.toLowerCase()) > -1
+        suggestion.indexOf(input.toLowerCase()) > -1
     );
-
     setFilteredSuggestions(filteredSuggestions)
     setShowSuggestions(true);
     setInputValue(input);
@@ -51,39 +47,37 @@ const SearchBar = (props) => {
     setInputValue(e.currentTarget.innerText);
   };
 
-  // const onKeyDown = e => {
-  //   // Enter
-  //   if (e.keyCode === 13) {
-  //     setActiveSuggestion(0);
-  //     setShowSuggestions(false);
-  //     setInputValue(filteredSuggestions[activeSuggestion]);
-  //   }
-  //   // Up
-  //   else if (e.keyCode === 38) {
-  //     if (activeSuggestion === 0) {
-  //       return;
-  //     }
-  //     setActiveSuggestion(activeSuggestion - 1);
-  //   }
-
-  //   // Down
-  //   else if (e.keyCode === 40) {
-  //     if (activeSuggestion - 1 === filteredSuggestions.length) {
-  //       return;
-  //     }
-
-  //     setActiveSuggestion(activeSuggestion + 1);
-  //   }
-  // };
+  const onKeyDown = e => {
+    // Enter
+    if (e.keyCode === 13 && showSuggestions && filteredSuggestions.length && activeSuggestion !== 0) {
+      e.preventDefault();
+      setShowSuggestions(false);
+      setInputValue(filteredSuggestions[activeSuggestion-1]);
+    }
+    // Up
+    if (e.keyCode === 38) {
+      if (activeSuggestion === 0) {
+        return;
+      }
+      setActiveSuggestion(activeSuggestion - 1);
+    }
+    // Down
+    if (e.keyCode === 40) {
+      if (activeSuggestion - 1 === filteredSuggestions.length) {
+        return;
+      }
+      setActiveSuggestion(activeSuggestion + 1);
+    }
+  };
 
   return (
-    <FormStyles onSubmit={onSubmit}>
+    <FormStyles onSubmit={onSubmit} >
       <input
-        type="text"
-        // onKeyDown={onKeyDown}
+        type="search"
         value={inputValue}
         onChange={onChange}
         placeholder={'Search for images !'}
+        onKeyDown={onKeyDown}
       />
       <SuggestionsList
         activeSuggestion={activeSuggestion}
@@ -96,10 +90,4 @@ const SearchBar = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-      pictures: state
-  }
-}
-
-export default connect(mapStateToProps, {fetchQueries})(SearchBar);
+export default SearchBar;
