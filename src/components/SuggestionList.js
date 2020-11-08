@@ -15,7 +15,7 @@ const ListStyles = styled.ul`
     margin: 0;
     padding: 2px;
     color: #929296;
-    &:hover {
+    &:hover, &.active {
       background-color: #d0d0db;
       color: #000000;
       cursor: pointer;
@@ -23,15 +23,16 @@ const ListStyles = styled.ul`
   }
 `
 
-const SuggestionsList = ({inputValue, showSuggestions, filteredSuggestions, onClick}) => {
+const SuggestionsList = ({inputValue, showSuggestions, filteredSuggestions, onClick, activeSuggestion}) => {
 
   if (showSuggestions && inputValue.length > 2) {
     if (filteredSuggestions.length) {
       return (
         <ListStyles>
-          {filteredSuggestions.map(suggestion => {
+          {filteredSuggestions.slice(0,5).map((suggestion, i) => {
+            const isActive = i === activeSuggestion ?'active':'';
             return (
-              <li key={suggestion} onClick={onClick}>
+              <li key={suggestion} onClick={onClick} className={isActive}>
                 {suggestion}
               </li>
             );

@@ -1,10 +1,33 @@
-import React from 'react';
-import ModalPicture from '../components/ModalPicture';
+import React, { useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { fetchCurrentPicture } from '../actions'
 
-const ImageSite = () => {
-  return (
-      <ModalPicture />
+const ModalStyles = styled.div`
+  border: solid red;
+  background-color: transparent;
+`
+
+const ImageSite = ({id, imageData, fetchCurrentPicture}) => {
+
+  useEffect(()=>{
+    fetchCurrentPicture(id)
+  },[])
+
+  return ReactDOM.createPortal(
+    <ModalStyles>
+      Mycha
+    </ModalStyles>,
+    document.querySelector('#modal')
   )
 }
 
-export default ImageSite;
+const mapStateToProps = (state, ownProps) => {
+  return {
+      imageData: state.currentPicture,
+      id: ownProps.match.params.query
+  }
+}
+
+export default connect (mapStateToProps, { fetchCurrentPicture })(ImageSite);

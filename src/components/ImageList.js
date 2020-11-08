@@ -19,15 +19,14 @@ const ImageListStyles = styled.div`
 `
 
 const ImageList = ({imageData}) => {
-  const onClick= (data) => {
-    history.push(`/pictures/show/${data}`);
+  const onClick= (id) => {
+    history.push(`/pictures/show/${id}`);
   }
 
   if (imageData) {
     return (
       <ImageListStyles>
         {Object.keys(imageData).map((key, i) => {
-          console.log(imageData[key])
           return (
             <div className="picture--container" key={i}>
               <img

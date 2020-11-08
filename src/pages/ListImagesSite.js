@@ -35,10 +35,10 @@ const SearchBarSectionStyles = styled.div`
   }
 `
 
-const ListImagesSite = ({query, pictures, fetchQueries}) => {
+const ListImagesSite = ({ query, pictures, fetchQueries }) => {
   useEffect(()=> {
     fetchQueries(query);
-  },[query])
+  },[])
 
   return (
     <ListSiteWrapper>
@@ -61,4 +61,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, {fetchQueries})(ListImagesSite);
+export default connect(mapStateToProps, { fetchQueries })(ListImagesSite);

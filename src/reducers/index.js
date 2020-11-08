@@ -10,7 +10,7 @@ const queriesReducer = (state = [], action) => {
 };
 const currentPictureReducer = (state = [], action) => {
     switch(action.type) {
-        case 'CHANGE_CURRENT_PICTURE':
+        case 'FETCH_CURRENT_PICTURE':
             return {...action.payload};
         default:
             return state
