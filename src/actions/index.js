@@ -6,7 +6,9 @@ export const fetchPictures = (term) => async dispatch => {
     params: {query: term}
   });
   dispatch ({ type: 'FETCH_PICTURES', payload: response.data.results });
-  history.push(`/pictures/${term}`)
+  if(window.location.pathname.split('/').pop() !== term) {
+    history.push(`/pictures/${term}`)
+  }
 };
 
 export const fetchCurrentPicture = (id) => async dispatch => {

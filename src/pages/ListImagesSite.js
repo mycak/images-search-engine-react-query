@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import SearchBar from '../components/SearchBar';
 import ImageList from '../components/ImageList';
@@ -36,6 +36,13 @@ const SearchBarSectionStyles = styled.div`
 `
 
 const ListImagesSite = ({ query, pictures, fetchPictures }) => {
+  console.log('render')
+  useEffect(()=> {
+    if((Object.keys(pictures).length === 0)){
+      fetchPictures(query)
+    }
+  },[query,pictures, fetchPictures])
+
   return (
     <ListSiteWrapper>
       <SearchBarSectionStyles>
