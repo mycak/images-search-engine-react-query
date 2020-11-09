@@ -14,6 +14,9 @@ const FormStyles = styled.form`
     border-radius: 4px;
     border: none;
   }
+  input[type=search]::placeholder {
+    font-size: clamp(8px, 1vw, 14px)
+  }
 `
 
 const SearchBar = ({fetchPictures}) => {
