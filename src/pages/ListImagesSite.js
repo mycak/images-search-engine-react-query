@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import SearchBar from '../components/SearchBar';
 import ImageList from '../components/ImageList';
@@ -36,12 +36,6 @@ const SearchBarSectionStyles = styled.div`
 `
 
 const ListImagesSite = ({ query, pictures, fetchPictures }) => {
-  //New data after refresh page
-  useEffect(()=> {
-    if((Object.keys(pictures).length === 0)){
-      fetchPictures(query)
-    }
-  },[query,pictures, fetchPictures])
 
   return (
     <ListSiteWrapper>
