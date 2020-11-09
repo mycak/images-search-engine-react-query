@@ -36,7 +36,7 @@ const SearchBarSectionStyles = styled.div`
 `
 
 const ListImagesSite = ({ query, pictures, fetchPictures }) => {
-  console.log('render')
+  //New data after refresh page
   useEffect(()=> {
     if((Object.keys(pictures).length === 0)){
       fetchPictures(query)
