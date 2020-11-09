@@ -4,14 +4,12 @@ import history from '../history';
 
 import ListImagesSite from '../pages/ListImagesSite';
 import MainSite from '../pages/MainSite';
-import ImageSite from '../pages/ImageSite'
 const App = () => {
   return (
     <Router history={history}>
       <Switch>
         <Route exact path="/" component={MainSite} />
         <Route exact path="/pictures/:query" component={ListImagesSite} />
-        <Route exact path="/pictures/show/:query" component={ImageSite} />
       </Switch>
     </Router>
   );

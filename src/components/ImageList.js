@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { fetchCurrentPicture } from '../actions';
-import ImageSite from '../pages/ImageSite';
+import ModalWrapper from './ModalWrapper';
 
 const ImageListStyles = styled.div`
   margin: auto;
@@ -35,7 +35,7 @@ const ImageList = ({imageData, fetchCurrentPicture}) => {
   const showModal = () => {
     if (isModalShown) {
       return (
-        <ImageSite closeModal={closeModal}/>
+        <ModalWrapper closeModal={closeModal}/>
       )
     }
   }

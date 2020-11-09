@@ -7,7 +7,7 @@ const ImageInfoStyles = styled.div`
   background-color: #fff;
   overflow-y: auto;
   .authorInfo--container {
-    max-width:50%;
+    max-width: 50%;
   }
   .authorInfo--container a{
     margin: 2px;
@@ -37,14 +37,14 @@ const ImageInfoStyles = styled.div`
       visibility: visible;
     }
 `
-const ImageInfo = ({firstName,lastName,userName,unsplashProfile,altImage, srcImage, locationName, locationPosition}) => {
+const ImageModal = ({firstName,lastName,userName,unsplashProfile,altImage, srcImage, locationName, locationPosition}) => {
   console.log(locationName)
   const showLocation = locationName ? 'active' : '';
 
   return (
     <ImageInfoStyles onClick={(e)=> e.stopPropagation()}>
       <div className="authorInfo--container">
-        <a href={unsplashProfile}>{`${firstName} ${lastName}`}</a>
+        <a href={unsplashProfile}>{`${firstName} ${lastName?lastName:''}`}</a>
         <a href={unsplashProfile}>{`@${userName}`}</a>
       </div>
       <div className="picture--container">
@@ -58,4 +58,4 @@ const ImageInfo = ({firstName,lastName,userName,unsplashProfile,altImage, srcIma
   );
 };
 
-export default ImageInfo;
+export default ImageModal;

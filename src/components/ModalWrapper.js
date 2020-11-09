@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { removeCurrentPictureData } from '../actions'
-import ImageInfo from '../components/Image';
+import ImageModal from './ImageModal';
 
 const ModalStyles = styled.div`
   padding: 0;
@@ -21,7 +21,7 @@ const ModalStyles = styled.div`
   justify-content: space-around;
 `
 
-const ImageSite = ({imageData, closeModal, removeCurrentPictureData}) => {
+const ModalWrapper = ({imageData, closeModal, removeCurrentPictureData}) => {
   const onClick = () => {
     closeModal();
     removeCurrentPictureData();
@@ -30,7 +30,7 @@ const ImageSite = ({imageData, closeModal, removeCurrentPictureData}) => {
   const renderImageInfo = (imageData) => {
     if (Object.keys(imageData).length !== 0) {
       return (
-        <ImageInfo
+        <ImageModal
           firstName={imageData.user.first_name}
           lastName={imageData.user.last_name}
           userName={imageData.user.username}
@@ -62,4 +62,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect (mapStateToProps, { removeCurrentPictureData })(ImageSite);
+export default connect (mapStateToProps, { removeCurrentPictureData })(ModalWrapper);
