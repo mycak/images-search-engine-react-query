@@ -15,7 +15,7 @@ const FormStyles = styled.form`
     border: none;
   }
   input[type=search]::placeholder {
-    font-size: clamp(8px, 1vw, 14px)
+    font-size: clamp(10px, 1vw, 14px)
   }
 `
 
