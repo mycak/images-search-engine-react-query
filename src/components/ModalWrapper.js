@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { removeCurrentPictureData } from '../actions'
-import ImageModal from './ImageModal';
+import ModalWindow from './ModalWindow';
 
 const ModalStyles = styled.div`
   padding: 0;
@@ -30,7 +30,7 @@ const ModalWrapper = ({imageData, closeModal, removeCurrentPictureData}) => {
   const renderImageInfo = (imageData) => {
     if (Object.keys(imageData).length !== 0) {
       return (
-        <ImageModal
+        <ModalWindow
           firstName={imageData.user.first_name}
           lastName={imageData.user.last_name}
           userName={imageData.user.username}
