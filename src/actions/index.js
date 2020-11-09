@@ -13,3 +13,9 @@ export const fetchCurrentPicture = (id) => async dispatch => {
   const response = await unsplash.get(`/photos/${id}`);
   dispatch ({ type: 'FETCH_CURRENT_PICTURE', payload: response.data });
 };
+
+export const removeCurrentPictureData = () => {
+  return {
+    type: 'REMOVE_CURRENT_PICTURE_DATA'
+  };
+};

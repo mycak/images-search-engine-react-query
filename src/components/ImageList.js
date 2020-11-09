@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { fetchCurrentPicture } from '../actions';
+import ImageSite from '../pages/ImageSite';
 
 const ImageListStyles = styled.div`
   margin: auto;
@@ -22,9 +23,21 @@ const ImageListStyles = styled.div`
 
 const ImageList = ({imageData, fetchCurrentPicture}) => {
 
+  const [isModalShown, setIsModalShown] = useState(false);
+  const closeModal = useCallback(()=>{
+    setIsModalShown(false);
+  },[])
+
   const onClick= (e) => {
-    e.preventDefault();
     fetchCurrentPicture(e.target.dataset.id)
+    setIsModalShown(true)
+  }
+  const showModal = () => {
+    if (isModalShown) {
+      return (
+        <ImageSite closeModal={closeModal}/>
+      )
+    }
   }
 
   if (Object.keys(imageData).length !== 0) {
@@ -42,6 +55,7 @@ const ImageList = ({imageData, fetchCurrentPicture}) => {
             </div>
           )
         })}
+        {showModal() }
       </ImageListStyles>
     );
   } else {

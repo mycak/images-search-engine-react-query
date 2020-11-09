@@ -2,28 +2,64 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { fetchCurrentPicture } from '../actions'
+import { removeCurrentPictureData } from '../actions'
+import ImageInfo from '../components/Image';
 
 const ModalStyles = styled.div`
-  border: solid red;
-  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: 20;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #dee2e680;
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: space-around;
 `
 
-const ImageSite = ({id, imageData, fetchCurrentPicture}) => {
+const ImageSite = ({imageData, closeModal, removeCurrentPictureData}) => {
+  const onClick = () => {
+    closeModal();
+    removeCurrentPictureData();
+  }
 
-  return ReactDOM.createPortal(
-    <ModalStyles>
-      Mycha
-    </ModalStyles>,
-    document.querySelector('#modal')
-  )
+  const renderImageInfo = (imageData) => {
+    if (Object.keys(imageData).length !== 0) {
+      return (
+        <ImageInfo
+          firstName={imageData.user.first_name}
+          lastName={imageData.user.last_name}
+          userName={imageData.user.username}
+          unsplashProfile={imageData.user.links.html}
+
+          srcImage={imageData.urls.regular}
+          altImage={imageData.alt_description}
+
+          locationName={imageData.location.name}
+          locationPosition={imageData.location.position}
+        />
+      )
+    } else return (
+      <div>Loading...</div>
+    )
+  }
+
+    return ReactDOM.createPortal(
+      <ModalStyles onClick={onClick}>
+        {renderImageInfo(imageData)}
+      </ModalStyles>,
+      document.querySelector('#modal')
+    )
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
-      imageData: state.currentPicture,
-      id: ownProps.match.params.query
+      imageData: state.currentPicture
   }
 }
 
-export default connect (mapStateToProps, { fetchCurrentPicture })(ImageSite);
+export default connect (mapStateToProps, { removeCurrentPictureData })(ImageSite);
