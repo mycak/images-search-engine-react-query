@@ -22,7 +22,7 @@ const ModalStyles = styled.div`
 `
 
 const ModalWrapper = ({imageData, closeModal, removeCurrentPictureData}) => {
-  const onClick = () => {
+  const goBack = () => {
     closeModal();
     removeCurrentPictureData();
   }
@@ -31,6 +31,7 @@ const ModalWrapper = ({imageData, closeModal, removeCurrentPictureData}) => {
     if (Object.keys(imageData).length !== 0) {
       return (
         <ModalWindow
+          goBack={goBack}
           firstName={imageData.user.first_name}
           lastName={imageData.user.last_name}
           userName={imageData.user.username}
@@ -49,7 +50,7 @@ const ModalWrapper = ({imageData, closeModal, removeCurrentPictureData}) => {
   }
 
     return ReactDOM.createPortal(
-      <ModalStyles onClick={onClick}>
+      <ModalStyles onClick={goBack}>
         {renderImageInfo(imageData)}
       </ModalStyles>,
       document.querySelector('#modal')
