@@ -10,7 +10,7 @@ const ImageInfoStyles = styled.div`
   }
   .authorInfo--container a{
     margin: 2px;
-    font-size: clamp(10px, 1.5vw, 20px);
+    font-size: clamp(12px, 2vw, 20px);
     color: #495057;
     display: block;
     text-decoration: none;
@@ -27,7 +27,7 @@ const ImageInfoStyles = styled.div`
   .placeInfo--container {
     visibility: hidden;
     margin: 2px;
-    font-size: clamp(10px, 1.5vw, 20px);
+    font-size: clamp(12px, 2vw, 20px);
     p {
       margin: 2px;
     }
@@ -36,7 +36,7 @@ const ImageInfoStyles = styled.div`
       visibility: visible;
     }
   .button--back button{
-    font-size: clamp(10px, 1.5vw, 20px);
+    font-size: clamp(12px, 2vw, 20px);
     margin: 2px;
   }
 `

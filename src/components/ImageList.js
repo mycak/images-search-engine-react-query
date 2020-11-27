@@ -60,7 +60,7 @@ const ImageList = ({imageData, fetchCurrentPicture}) => {
     );
   } else {
     return (
-      <div style={{textAlign: 'center'}}>Any results...</div>
+      <div style={{textAlign: 'center', fontSize: 'clamp(12px, 2vw, 20px)'}}>Any results...</div>
     )
   }
 };

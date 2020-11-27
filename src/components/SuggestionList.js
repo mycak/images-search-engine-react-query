@@ -12,6 +12,7 @@ const ListStyles = styled.ul`
   overflow-y: auto;
   width: 100%;
   li, p {
+    font-size: clamp(12px, 2vw, 20px);
     margin: 0;
     padding: 2px;
     color: #929296;

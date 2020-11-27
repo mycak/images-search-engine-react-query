@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import SearchBar from '../components/SearchBar';
 import { connect } from 'react-redux';
 import { fetchPictures } from '../actions';
+import bg2 from '../assets/images/bg2.webp'
 
 const SiteContainer = styled.div`
-  background-image: url('https://cdn.pixabay.com/photo/2016/11/06/05/36/landscape-1802337_960_720.jpg');
+  background-image: url(${bg2});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

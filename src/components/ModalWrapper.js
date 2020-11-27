@@ -45,7 +45,7 @@ const ModalWrapper = ({imageData, closeModal, removeCurrentPictureData}) => {
         />
       )
     } else return (
-      <div>Loading...</div>
+      <div style={{textAlign: 'center', fontSize: 'clamp(12px, 2vw, 20px)'}}>Loading...</div>
     )
   }
 

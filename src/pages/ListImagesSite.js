@@ -4,6 +4,7 @@ import SearchBar from '../components/SearchBar';
 import ImageList from '../components/ImageList';
 import { connect } from 'react-redux';
 import { fetchPictures, fetchCurrentPicture } from '../actions';
+import bg1 from '../assets/images/bg1.jpg'
 
 const ListSiteWrapper = styled.div `
   min-height: 100vh;
@@ -21,7 +22,7 @@ const ListSiteWrapper = styled.div `
 const SearchBarSectionStyles = styled.div`
   width: 100%;
   height: 40vh;
-  background-image: url('https://cdn.pixabay.com/photo/2018/08/20/15/31/trees-3619180_960_720.jpg');
+  background-image: url(${bg1});
   background-position: left bottom;
   background-size: cover;
   background-repeat: no-repeat;

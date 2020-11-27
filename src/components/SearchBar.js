@@ -7,6 +7,7 @@ const FormStyles = styled.form`
   width: 100%;
   height: 100%;
   input[type=search] {
+    font-size: clamp(12px, 2vw, 20px);
     box-sizing:border-box;
     padding: 5px;
     width: 100%;
@@ -15,7 +16,11 @@ const FormStyles = styled.form`
     border: none;
   }
   input[type=search]::placeholder {
-    font-size: clamp(10px, 1vw, 14px)
+    font-size: clamp(12px, 2vw, 20px)
+  }
+  input[type=search]:focus {
+    border: none;
+    outline: none;
   }
 `
 
@@ -44,11 +49,6 @@ const SearchBar = ({fetchPictures}) => {
   };
 
   const onClick = e => {
-    console.log(e.currentTarget.innerText)
-    // setActiveSuggestion(0)
-    // setFilteredSuggestions([]);
-    // setShowSuggestions(false)
-    // setInputValue(e.currentTarget.innerText);
     e.preventDefault();
     fetchPictures(e.currentTarget.innerText);
   };
