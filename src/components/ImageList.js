@@ -3,22 +3,29 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { fetchCurrentPicture } from '../actions';
 import ModalWrapper from './ModalWrapper';
+import Masonry from 'react-masonry-css'
 
 const ImageListStyles = styled.div`
   margin: auto;
-  width: 95%;
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  gap: 2rem;
-  grid-template-columns: repeat(3, minmax(auto, 1fr));
-  .picture--container{
-    max-width: 35vw;
-  }
+  width: 98%;
   .picture--container img {
     width: 100%;
     height: auto;
   }
+  .my-masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 2px;
+  padding-right: 2px; /* gutter size */
+  background-clip: padding-box;
+}
+.my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
+  margin-bottom: 2px;
+}
 `
 
 const ImageList = ({imageData, fetchCurrentPicture}) => {
@@ -43,7 +50,12 @@ const ImageList = ({imageData, fetchCurrentPicture}) => {
   if (Object.keys(imageData).length !== 0) {
     return (
       <ImageListStyles>
-        {Object.keys(imageData).map((key, i) => {
+        <Masonry
+          breakpointCols={3}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
+          {Object.keys(imageData).map((key, i) => {
           return (
             <div className="picture--container" key={i}>
               <img
@@ -55,6 +67,7 @@ const ImageList = ({imageData, fetchCurrentPicture}) => {
             </div>
           )
         })}
+        </Masonry>
         {showModal() }
       </ImageListStyles>
     );
