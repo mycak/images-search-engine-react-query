@@ -1,8 +1,10 @@
 import React from 'react';
-import ImageInfoStyles from './styles/modalWindow'
+import ImageInfoStyles from './styles/modalWindow';
 
-const ModalWindow = ({goBack, firstName,lastName,userName,unsplashProfile,altImage, srcImage, locationName, locationPosition}) => {
+const ModalWindow = ({activeIndex, goBack, goToNext, goToPrev, firstName,lastName,userName,unsplashProfile,altImage, srcImage, locationName, locationPosition}) => {
   const showLocation = locationName ? 'active' : '';
+  const showPrevButton = activeIndex === 0 ? 'hidden' : '';
+  const showNextButton = activeIndex === 9 ? 'hidden' : '';
 
   return (
     <ImageInfoStyles onClick={(e)=> e.stopPropagation()}>
@@ -17,8 +19,16 @@ const ModalWindow = ({goBack, firstName,lastName,userName,unsplashProfile,altIma
         <p>{locationName}</p>
         <a href={`https://www.google.com/maps/search/?api=1&query=${locationPosition.latitude},${locationPosition.longitude}`}>Google Maps</a>
       </div>
-      <div className="button--back">
-        <button onClick={goBack}>Go back</button>
+      <div className="buttons--container">
+        <div className={`${showPrevButton}`}>
+          <button onClick={goToPrev}>Go to prev</button>
+        </div>
+        <div>
+          <button onClick={goBack}>Go back</button>
+        </div>
+        <div className={`${showNextButton}`}>
+          <button onClick={goToNext}>Go to next</button>
+        </div>
       </div>
     </ImageInfoStyles>
   );

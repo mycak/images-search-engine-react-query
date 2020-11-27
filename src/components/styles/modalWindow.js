@@ -7,13 +7,13 @@ const ImageInfoStyles = styled.div`
   overflow-y: auto;
   .authorInfo--container {
     max-width: 50%;
-  }
-  .authorInfo--container a{
+    a {
     margin: 2px;
     font-size: clamp(12px, 2vw, 20px);
     color: #495057;
     display: block;
     text-decoration: none;
+    }
   }
   .picture--container {
     padding: 5px;
@@ -31,14 +31,21 @@ const ImageInfoStyles = styled.div`
     p {
       margin: 2px;
     }
-  }
-  .placeInfo--container.active {
+    &.active {
       visibility: visible;
     }
-  .button--back button{
-    font-size: clamp(12px, 2vw, 20px);
-    margin: 2px;
   }
+  .buttons--container {
+    display: flex;
+    flex-direction: row;
+    font-size: clamp(12px, 2vw, 20px);
+    margin: 20px;
+    justify-content: space-between;
+    .hidden {
+      visibility: hidden;
+    }
+  }
+  
 `
 
 export default ImageInfoStyles;

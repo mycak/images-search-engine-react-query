@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import SuggestionsList from './SuggestionList';
-import { countryList } from '../suggestionslist'
+import { countryList } from '../suggestionslist';
 
 const FormStyles = styled.form`
   width: 100%;
@@ -22,7 +22,7 @@ const FormStyles = styled.form`
     border: none;
     outline: none;
   }
-`
+`;
 
 const SearchBar = ({fetchPictures}) => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
@@ -34,7 +34,7 @@ const SearchBar = ({fetchPictures}) => {
   const onSubmit = (e) => {
     e.preventDefault();
     fetchPictures(inputValue);
-  }
+  };
 
   const onChange = e => {
     setActiveSuggestion(0);

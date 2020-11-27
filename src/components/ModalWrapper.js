@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { removeCurrentPictureData } from '../actions'
+import { removeCurrentPictureData, fetchCurrentPicture } from '../actions';
 import ModalWindow from './ModalWindow';
 
 const ModalStyles = styled.div`
@@ -19,19 +19,43 @@ const ModalStyles = styled.div`
   flex-direction:column;
   align-items: center;
   justify-content: space-around;
-`
+`;
 
-const ModalWrapper = ({imageData, closeModal, removeCurrentPictureData}) => {
+const ModalWrapper = ({imageData, imagesData, currentId, closeModal, removeCurrentPictureData, fetchCurrentPicture}) => {
+  const [activeIndex, seActiveIndex] = useState(parseInt(currentId));
+
   const goBack = () => {
     closeModal();
     removeCurrentPictureData();
-  }
+  };
+
+  const goToNext = () => {
+    if(activeIndex!==9){
+      const nextId = activeIndex + 1;
+    removeCurrentPictureData();
+    fetchCurrentPicture(imagesData[nextId].id);
+    seActiveIndex(nextId);
+    };
+  };
+
+  const goToPrev = () => {
+    if(activeIndex!==0){
+      const nextId = activeIndex - 1;
+    removeCurrentPictureData();
+    fetchCurrentPicture(imagesData[nextId].id);
+    seActiveIndex(nextId);
+    };
+  };
 
   const renderImageInfo = (imageData) => {
     if (Object.keys(imageData).length !== 0) {
       return (
         <ModalWindow
           goBack={goBack}
+          goToNext={goToNext}
+          goToPrev={goToPrev}
+          activeIndex={activeIndex}
+
           firstName={imageData.user.first_name}
           lastName={imageData.user.last_name}
           userName={imageData.user.username}
@@ -59,8 +83,9 @@ const ModalWrapper = ({imageData, closeModal, removeCurrentPictureData}) => {
 
 const mapStateToProps = (state) => {
   return {
-      imageData: state.currentPicture
+      imageData: state.currentPicture,
+      imagesData: state.pictures
   }
-}
+};
 
-export default connect (mapStateToProps, { removeCurrentPictureData })(ModalWrapper);
+export default connect (mapStateToProps, { removeCurrentPictureData, fetchCurrentPicture })(ModalWrapper);

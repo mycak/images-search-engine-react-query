@@ -12,13 +12,13 @@ const ListSiteWrapper = styled.div `
   display: flex;
   flex-direction: column;
   align-items: center;
-  .section--pictures {
+  .pictures--container {
     margin-top: 2em;
     margin-bottom: 2em;
     width: 100%;
     height: 100%;
   }
-`
+`;
 const SearchBarSectionStyles = styled.div`
   width: 100%;
   height: 40vh;
@@ -34,7 +34,7 @@ const SearchBarSectionStyles = styled.div`
     width: 40vw;
     height: 5vh;
   }
-`
+`;
 
 const ListImagesSite = ({ query, pictures, fetchPictures }) => {
 
@@ -45,7 +45,7 @@ const ListImagesSite = ({ query, pictures, fetchPictures }) => {
           <SearchBar fetchPictures={fetchPictures} />
         </div>
       </SearchBarSectionStyles>
-      <div className="section--pictures">
+      <div className="pictures--container">
         <ImageList imageData={pictures} />
       </div>
     </ListSiteWrapper>
@@ -57,6 +57,6 @@ const mapStateToProps = (state, ownProps) => {
       pictures: state.pictures,
       query: ownProps.match.params.query
   }
-}
+};
 
 export default connect(mapStateToProps, { fetchPictures, fetchCurrentPicture })(ListImagesSite);

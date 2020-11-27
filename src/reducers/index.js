@@ -17,7 +17,7 @@ const currentPictureReducer = (state = {}, action) => {
         default:
             return state
     }
-}
+};
 
 export default combineReducers({
     pictures: queriesReducer,

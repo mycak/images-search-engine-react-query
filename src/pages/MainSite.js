@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import SearchBar from '../components/SearchBar';
 import { connect } from 'react-redux';
 import { fetchPictures } from '../actions';
-import bg2 from '../assets/images/bg2.webp'
+import bg2 from '../assets/images/bg2.webp';
 
 const SiteContainer = styled.div`
   background-image: url(${bg2});
@@ -21,7 +21,8 @@ const SiteContainer = styled.div`
     width: 40vw;
     height: 6vh;
   }
-`
+`;
+
 const MainSite = ({fetchPictures}) => {
   return (
     <SiteContainer>
@@ -35,6 +36,6 @@ const mapStateToProps = state => {
   return {
       state
   }
-}
+};
 
 export default connect (mapStateToProps, { fetchPictures })(MainSite);

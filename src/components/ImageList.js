@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { fetchCurrentPicture } from '../actions';
 import ModalWrapper from './ModalWrapper';
-import Masonry from 'react-masonry-css'
+import Masonry from 'react-masonry-css';
 
 const ImageListStyles = styled.div`
   margin: auto;
-  width: 98%;
+  width: 99%;
   .picture--container img {
     width: 100%;
     height: auto;
@@ -17,32 +17,34 @@ const ImageListStyles = styled.div`
   display: -ms-flexbox; /* Not needed if autoprefixing */
   display: flex;
   width: auto;
-}
-.my-masonry-grid_column {
-  padding-left: 2px;
-  padding-right: 2px; /* gutter size */
-  background-clip: padding-box;
-}
-.my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
-  margin-bottom: 2px;
-}
-`
+  }
+  .my-masonry-grid_column {
+    padding-left: 2px;
+    padding-right: 2px;
+    background-clip: padding-box;
+  }
+  .my-masonry-grid_column > div{
+    margin-bottom: 2px;
+  }
+`;
 
 const ImageList = ({imageData, fetchCurrentPicture}) => {
-
+  const [currentId, setCurrentId] = useState(null);
   const [isModalShown, setIsModalShown] = useState(false);
   const closeModal = useCallback(()=>{
     setIsModalShown(false);
   },[])
 
   const onClick= (e) => {
-    fetchCurrentPicture(e.target.dataset.id)
+    const modalData = imageData[e.target.dataset.id];
+    setCurrentId(e.target.dataset.id)
+    fetchCurrentPicture(modalData.id)
     setIsModalShown(true)
   }
   const showModal = () => {
     if (isModalShown) {
       return (
-        <ModalWrapper closeModal={closeModal}/>
+        <ModalWrapper closeModal={closeModal} currentId={currentId}  />
       )
     }
   }
@@ -62,7 +64,7 @@ const ImageList = ({imageData, fetchCurrentPicture}) => {
               onClick={onClick}
               alt={imageData[key].alt_description}
               src={imageData[key].urls.regular}
-              data-id={imageData[key].id}
+              data-id={i}
               />
             </div>
           )
@@ -82,6 +84,6 @@ const mapStateToProps = (state) => {
   return {
       pictures: state.pictures,
   }
-}
+};
 
 export default connect(mapStateToProps, { fetchCurrentPicture })(ImageList);

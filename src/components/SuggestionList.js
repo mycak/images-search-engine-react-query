@@ -22,7 +22,7 @@ const ListStyles = styled.ul`
       cursor: pointer;
     }
   }
-`
+`;
 
 const SuggestionsList = ({inputValue, showSuggestions, filteredSuggestions, onClick, activeSuggestion}) => {
   if (showSuggestions && inputValue.length > 2 && inputValue !== filteredSuggestions[0]) {
@@ -50,6 +50,6 @@ const SuggestionsList = ({inputValue, showSuggestions, filteredSuggestions, onCl
   return (
     <div></div>
   )
-}
+};
 
 export default SuggestionsList;
