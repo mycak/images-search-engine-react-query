@@ -1,89 +1,71 @@
-import React, { useCallback, useState } from 'react';
-import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { fetchCurrentPicture } from '../actions';
-import ModalWrapper from './ModalWrapper';
-import Masonry from 'react-masonry-css';
+import React, { useState } from "react";
+import styled from "styled-components";
+import Modal from "./Modal";
+import Masonry from "react-masonry-css";
 
 const ImageListStyles = styled.div`
-  margin: auto;
-  width: 99%;
+  width: 98%;
+  margin: 1em auto 1em auto;
+  text-align: center;
   .picture--container img {
     width: 100%;
     height: auto;
   }
   .my-masonry-grid {
-  display: -webkit-box; /* Not needed if autoprefixing */
-  display: -ms-flexbox; /* Not needed if autoprefixing */
-  display: flex;
-  width: auto;
+    display: -webkit-box; /* Not needed if autoprefixing */
+    display: -ms-flexbox; /* Not needed if autoprefixing */
+    display: flex;
+    width: auto;
   }
   .my-masonry-grid_column {
     padding-left: 2px;
     padding-right: 2px;
     background-clip: padding-box;
   }
-  .my-masonry-grid_column > div{
+  .my-masonry-grid_column > div {
     margin-bottom: 2px;
   }
 `;
 
-const ImageList = ({imageData, fetchCurrentPicture}) => {
+const ImageList = ({ imagesData }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentId, setCurrentId] = useState(null);
-  const [isModalShown, setIsModalShown] = useState(false);
-  const closeModal = useCallback(()=>{
-    setIsModalShown(false);
-  },[])
 
-  const onClick= (e) => {
-    const modalData = imageData[e.target.dataset.id];
-    setCurrentId(e.target.dataset.id)
-    fetchCurrentPicture(modalData.id)
-    setIsModalShown(true)
-  }
-  const showModal = () => {
-    if (isModalShown) {
-      return (
-        <ModalWrapper closeModal={closeModal} currentId={currentId}  />
-      )
-    }
-  }
+  const onClick = (e) => {
+    setIsModalOpen(true);
+    setCurrentId(e.target.dataset.id);
+  };
 
-  if (Object.keys(imageData).length !== 0) {
-    return (
-      <ImageListStyles>
-        <Masonry
-          breakpointCols={3}
-          className="my-masonry-grid"
-          columnClassName="my-masonry-grid_column"
-        >
-          {Object.keys(imageData).map((key, i) => {
+  return (
+    <ImageListStyles>
+      {!imagesData.length && <p> No results.</p>}
+      <Masonry
+        breakpointCols={3}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
+        {imagesData.map((image, i) => {
           return (
             <div className="picture--container" key={i}>
               <img
-              onClick={onClick}
-              alt={imageData[key].alt_description}
-              src={imageData[key].urls.regular}
-              data-id={i}
+                onClick={onClick}
+                alt={image.alt_description}
+                src={image.urls.regular}
+                data-id={i}
               />
             </div>
-          )
+          );
         })}
-        </Masonry>
-        {showModal() }
-      </ImageListStyles>
-    );
-  } else {
-    return (
-      <div style={{textAlign: 'center', fontSize: 'clamp(12px, 2vw, 20px)'}}>Any results...</div>
-    )
-  }
+      </Masonry>
+      {isModalOpen && (
+        <Modal
+          loseModal={() => setIsModalOpen(false)}
+          currentId={currentId}
+          data={imagesData}
+        />
+      )}
+    </ImageListStyles>
+  );
 };
 
-const mapStateToProps = (state) => {
-  return {
-      pictures: state.pictures,
-  }
-};
-
-export default connect(mapStateToProps, { fetchCurrentPicture })(ImageList);
+export default ImageList;

@@ -1,20 +1,26 @@
 import React from "react";
 import { Route, Router, Switch } from "react-router-dom";
 import history from "../history";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+import listImages from "../pages/listImages";
+import homePage from "../pages/homePage";
 import GlobalStyles from "./styles/GlobalStyles";
 
-import ListImagesSite from "../pages/ListImagesSite";
-import MainSite from "../pages/MainSite";
+const queryClient = new QueryClient();
+
 const App = () => {
   return (
     <>
       <GlobalStyles />
-      <Router history={history}>
-        <Switch>
-          <Route exact path="/" component={MainSite} />
-          <Route exact path="/pictures/:query" component={ListImagesSite} />
-        </Switch>
-      </Router>
+      <QueryClientProvider client={queryClient}>
+        <Router history={history}>
+          <Switch>
+            <Route exact path="/" component={homePage} />
+            <Route exact path="/pictures/:query" component={listImages} />
+          </Switch>
+        </Router>
+      </QueryClientProvider>
     </>
   );
 };

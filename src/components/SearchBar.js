@@ -22,7 +22,7 @@ const FormStyles = styled.form`
   }
 `;
 
-const SearchBar = ({ fetchPictures }) => {
+const SearchBar = ({ onCli }) => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [inputValue, setInputValue] = useState("");

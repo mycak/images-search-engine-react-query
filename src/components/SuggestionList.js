@@ -3,18 +3,15 @@ import styled from "styled-components";
 
 const ListStyles = styled.ul`
   position: absolute;
+  margin-top: 3px;
   z-index: 2;
-  padding: 0;
   background-color: #fff;
   border-radius: 4px;
   list-style: none;
-  margin-top: 3px;
-  max-height: 30vh;
   width: inherit;
   li,
   p {
     font-size: clamp(12px, 2vw, 20px);
-    margin: 0;
     padding: 2px;
     color: #929296;
     &:hover,
