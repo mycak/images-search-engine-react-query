@@ -1,14 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
-import SearchBar from '../components/SearchBar';
-import ImageList from '../components/ImageList';
-import { connect } from 'react-redux';
-import { fetchPictures, fetchCurrentPicture } from '../actions';
-import bg1 from '../assets/images/bg1.jpg'
+import React from "react";
+import styled from "styled-components";
+import SearchBar from "../components/SearchBar";
+// import ImageList from "../components/ImageList";
+import bg1 from "../assets/images/bg1.jpg";
 
-const ListSiteWrapper = styled.div `
+const ListSiteWrapper = styled.div`
   min-height: 100vh;
-  max-width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,43 +17,28 @@ const ListSiteWrapper = styled.div `
   }
 `;
 const SearchBarSectionStyles = styled.div`
-  width: 100%;
-  height: 40vh;
-  background-image: url(${bg1});
-  background-position: left bottom;
-  background-size: cover;
-  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-around;
-  .searchBar--container {
-    width: 40vw;
-    height: 5vh;
-  }
+  align-items: center;
+  width: 100%;
+  min-height: 40vh;
+  background-image: url(${bg1});
+  background-size: cover;
 `;
 
-const ListImagesSite = ({ query, pictures, fetchPictures }) => {
-
+const ListImagesSite = ({ match }) => {
+  const query = match.params.query;
+  console.log(query);
   return (
     <ListSiteWrapper>
       <SearchBarSectionStyles>
-        <div className="searchBar--container">
-          <SearchBar fetchPictures={fetchPictures} />
-        </div>
+        <SearchBar />
       </SearchBarSectionStyles>
-      <div className="pictures--container">
+      {/* <div className="pictures--container">
         <ImageList imageData={pictures} />
-      </div>
+      </div> */}
     </ListSiteWrapper>
   );
 };
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-      pictures: state.pictures,
-      query: ownProps.match.params.query
-  }
-};
-
-export default connect(mapStateToProps, { fetchPictures, fetchCurrentPicture })(ListImagesSite);
+export default ListImagesSite;

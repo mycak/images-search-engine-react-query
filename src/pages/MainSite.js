@@ -1,41 +1,25 @@
-import React from 'react';
-import styled from 'styled-components';
-import SearchBar from '../components/SearchBar';
-import { connect } from 'react-redux';
-import { fetchPictures } from '../actions';
-import bg2 from '../assets/images/bg2.webp';
+import React from "react";
+import styled from "styled-components";
+import SearchBar from "../components/SearchBar";
+import bg1 from "../assets/images/bg1.jpg";
 
 const SiteContainer = styled.div`
-  background-image: url(${bg2});
+  background-image: url(${bg1});
   background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
-  min-width: 100vw;
   min-height: 100vh;
+  padding-top: 5em;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-  .searchBar--container {
-    transform: translateY(-300%);
-    width: 40vw;
-    height: 6vh;
-  }
 `;
 
-const MainSite = ({fetchPictures}) => {
+const MainSite = () => {
   return (
     <SiteContainer>
-      <div className="searchBar--container">
-        <SearchBar fetchPictures={fetchPictures} />
-      </div>
+      <SearchBar />
     </SiteContainer>
   );
 };
-const mapStateToProps = state => {
-  return {
-      state
-  }
-};
 
-export default connect (mapStateToProps, { fetchPictures })(MainSite);
+export default MainSite;
