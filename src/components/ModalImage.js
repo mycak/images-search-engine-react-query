@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import unsplash from "../api/unsplash";
 import history from "../utils/history";
+import iconExit from "../assets/images/exit.svg";
+import iconPagination from "../assets/images/pagination.svg";
 import {
   ImageInfoStyles,
   ButtonNext,
@@ -10,6 +12,7 @@ import {
   PlaceInfoContainer,
   PictureContainer,
   AuthorInfoContainer,
+  ModalIcon,
 } from "./styles/ModalStyles";
 
 const ModalImage = ({ imagesData, currentId, mainQuery, id, closeModal }) => {
@@ -22,7 +25,7 @@ const ModalImage = ({ imagesData, currentId, mainQuery, id, closeModal }) => {
   });
 
   const goTo = (e) => {
-    const direction = e.target.dataset.direction;
+    const direction = e.target.parentElement.dataset.direction;
     if (direction === "next" && activeIndex !== 9) {
       seActiveIndex((prevState) => prevState + 1);
     } else if (activeIndex !== 0 && direction === "prev") {
@@ -61,15 +64,17 @@ const ModalImage = ({ imagesData, currentId, mainQuery, id, closeModal }) => {
             data-direction="prev"
             onClick={goTo}
           >
-            Go to prev
+            <ModalIcon src={iconPagination} alt="exit" />
           </ButtonPrev>
-          <ButtonBack onClick={closeModal}>Go back</ButtonBack>
+          <ButtonBack onClick={closeModal}>
+            <ModalIcon src={iconExit} alt="exit" />
+          </ButtonBack>
           <ButtonNext
             activeIndex={activeIndex}
             data-direction="next"
             onClick={goTo}
           >
-            Go to next
+            <ModalIcon src={iconPagination} alt="exit" />
           </ButtonNext>
         </ImageInfoStyles>
       )}

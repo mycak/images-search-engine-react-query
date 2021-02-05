@@ -47,16 +47,23 @@ export const PlaceInfoContainer = styled.div`
 `;
 export const ButtonPrev = styled.button`
   position: fixed;
-
+  background-color: transparent;
+  border: none;
   top: 50%;
   right: 100%;
+  width: 6em;
+  transform: translateY(-50%) rotate(180deg);
   visibility: ${({ activeIndex }) =>
     activeIndex === 0 ? "hidden" : "visible"};
 `;
 export const ButtonNext = styled.button`
   position: fixed;
+  background-color: transparent;
+  border: none;
   top: 50%;
   left: 100%;
+  width: 6em;
+  transform: translateY(-50%);
   visibility: ${({ activeIndex }) =>
     activeIndex === 9 ? "hidden" : "visible"};
 `;
@@ -65,4 +72,11 @@ export const ButtonBack = styled.button`
   position: fixed;
   top: 0;
   left: 100%;
+  width: 3em;
+  background-color: transparent;
+  border: none;
+`;
+
+export const ModalIcon = styled.img`
+  width: 100%;
 `;

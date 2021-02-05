@@ -18,8 +18,6 @@ const ImageList = ({ query, id }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentId, setCurrentId] = useState(null);
 
-  // const openModalOnRefresh = () => {};
-
   useEffect(() => {
     if (data && id && !isModalOpen) {
       const results = data.data.results;
