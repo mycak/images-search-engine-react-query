@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import unsplash from "../api/unsplash";
+import history from "../utils/history";
 import {
   ImageInfoStyles,
   ButtonNext,
@@ -11,12 +12,15 @@ import {
   AuthorInfoContainer,
 } from "./styles/ModalStyles";
 
-const ModalImage = ({ imagesData, currentId, closeModal }) => {
+const ModalImage = ({ imagesData, currentId, mainQuery, id, closeModal }) => {
   const [activeIndex, seActiveIndex] = useState(parseInt(currentId));
   const query = imagesData[activeIndex].id;
-  const { isLoading, error, data } = useQuery(query, () =>
-    unsplash.get(`/photos/${query}`)
-  );
+
+  const { isLoading, error, data } = useQuery(query, () => {
+    history.push(`/pictures/${mainQuery}/${query}`);
+    return unsplash.get(`/photos/${query}`);
+  });
+
   const goTo = (e) => {
     const direction = e.target.dataset.direction;
     if (direction === "next" && activeIndex !== 9) {
@@ -25,6 +29,7 @@ const ModalImage = ({ imagesData, currentId, closeModal }) => {
       seActiveIndex((prevState) => prevState - 1);
     }
   };
+
   return (
     <>
       {data && (

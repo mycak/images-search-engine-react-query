@@ -23,12 +23,13 @@ const SearchbarSectionStyles = styled.div`
 
 const ListImagesSite = ({ match }) => {
   const query = match.params.query;
+  const id = match.params.id;
   return (
     <SiteContainer>
       <SearchbarSectionStyles>
         <Searchbar />
       </SearchbarSectionStyles>
-      <ImageList query={query} />
+      <ImageList query={query} id={id} />
     </SiteContainer>
   );
 };

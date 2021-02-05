@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const FormStyles = styled.form`
   width: 60%;
   input[type="search"] {
-    font-size: clamp(12px, 2vw, 20px);
+    font-size: 1em;
     padding: 5px;
     width: 100%;
     border-radius: 4px;

@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import unsplash from "../api/unsplash";
 import { useQuery } from "react-query";
 import ModalImage from "./ModalImage";
 import Masonry from "react-masonry-css";
 import Modal from "react-modal";
+import history from "../utils/history";
 import { ImageListStyles } from "./styles/ImageListStyles";
 import { customStyles } from "./styles/ModalStyles";
 Modal.setAppElement("#modal");
 
-const ImageList = ({ query }) => {
+const ImageList = ({ query, id }) => {
   const { isLoading, error, data } = useQuery(query, () =>
     unsplash.get("/search/photos/", {
       params: { query },
@@ -17,11 +18,21 @@ const ImageList = ({ query }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentId, setCurrentId] = useState(null);
 
+  // const openModalOnRefresh = () => {};
+
+  useEffect(() => {
+    if (data && id && !isModalOpen) {
+      const results = data.data.results;
+      const index = results.map((item) => item.id).indexOf(id);
+      setCurrentId(index);
+      setIsModalOpen(true);
+    }
+  }, [data, id, isModalOpen]);
+
   const onClick = (e) => {
     setIsModalOpen(true);
     setCurrentId(e.target.dataset.id);
   };
-
   return (
     <>
       {data && (
@@ -47,13 +58,20 @@ const ImageList = ({ query }) => {
           </Masonry>
           <Modal
             isOpen={isModalOpen}
-            // onAfterOpen={afterOpenModal}
-            onRequestClose={() => setIsModalOpen(false)}
+            onRequestClose={() => {
+              history.push(`/pictures/${query}`);
+              setIsModalOpen(false);
+            }}
             style={customStyles}
             contentLabel="singleImage"
           >
             <ModalImage
-              closeModal={() => setIsModalOpen(false)}
+              mainQuery={query}
+              id={id}
+              closeModal={() => {
+                history.push(`/pictures/${query}`);
+                setIsModalOpen(false);
+              }}
               currentId={currentId}
               imagesData={data.data.results}
             ></ModalImage>

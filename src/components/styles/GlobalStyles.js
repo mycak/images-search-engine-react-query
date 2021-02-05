@@ -20,8 +20,10 @@ a {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   line-height: 1.6;
-  text-decoration: none;
   color: #000000;
+}
+a {
+  text-decoration: none;
 }
 `;
 export default GlobalStyles;

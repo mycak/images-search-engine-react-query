@@ -17,7 +17,7 @@ const App = () => {
         <Router history={history}>
           <Switch>
             <Route exact path="/" component={homePage} />
-            <Route exact path="/pictures/:query" component={listImages} />
+            <Route path="/pictures/:query/:id?" component={listImages} />
           </Switch>
         </Router>
       </QueryClientProvider>
