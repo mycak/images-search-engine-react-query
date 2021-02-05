@@ -21,7 +21,6 @@ export const FormStyles = styled.form`
 export const ListStyles = styled.ul`
   position: absolute;
   margin-top: 3px;
-  z-index: 2;
   background-color: #fff;
   border-radius: 4px;
   list-style: none;

@@ -20,6 +20,6 @@ export const ImageListStyles = styled.div`
     background-clip: padding-box;
   }
   .my-masonry-grid_column > div {
-    margin-bottom: 2px;
+    margin-bottom: -2px;
   }
 `;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import unsplash from "../api/unsplash";
 import { useQuery } from "react-query";
-import ModalContainer from "./ModalContainer";
+import ModalImage from "./ModalImage";
 import Masonry from "react-masonry-css";
 import Modal from "react-modal";
 import { ImageListStyles } from "./styles/ImageListStyles";
@@ -52,11 +52,11 @@ const ImageList = ({ query }) => {
             style={customStyles}
             contentLabel="singleImage"
           >
-            <ModalContainer
+            <ModalImage
               closeModal={() => setIsModalOpen(false)}
               currentId={currentId}
               imagesData={data.data.results}
-            ></ModalContainer>
+            ></ModalImage>
           </Modal>
         </ImageListStyles>
       )}
