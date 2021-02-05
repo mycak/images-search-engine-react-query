@@ -1,28 +1,10 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import { countryList } from "../utils/suggestionslist";
 import SuggestionsList from "./SuggestionList";
-import { countryList } from "../suggestionslist";
-import history from "../history";
+import history from "../utils/history";
+import { FormStyles } from "./styles/SearchbarStyles";
 
-const FormStyles = styled.form`
-  width: 60%;
-  input[type="search"] {
-    font-size: clamp(12px, 2vw, 20px);
-    padding: 5px;
-    width: 100%;
-    border-radius: 4px;
-    border: none;
-  }
-  input[type="search"]::placeholder {
-    font-size: clamp(12px, 2vw, 20px);
-  }
-  input[type="search"]:focus {
-    border: none;
-    outline: none;
-  }
-`;
-
-const SearchBar = ({ onCli }) => {
+const Searchbar = () => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -33,7 +15,6 @@ const SearchBar = ({ onCli }) => {
     e.preventDefault();
     history.push(`/pictures/${inputValue}`);
   };
-
   const onChange = (e) => {
     setActiveSuggestion(0);
     const input = e.target.value.toLowerCase();
@@ -44,12 +25,11 @@ const SearchBar = ({ onCli }) => {
     setShowSuggestions(true);
     setInputValue(input);
   };
-
   const onClick = (e) => {
     e.preventDefault();
+    setShowSuggestions(false);
     history.push(`/pictures/${e.currentTarget.innerText}`);
   };
-
   const onKeyDown = (e) => {
     // Enter
     if (
@@ -98,4 +78,4 @@ const SearchBar = ({ onCli }) => {
   );
 };
 
-export default SearchBar;
+export default Searchbar;

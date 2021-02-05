@@ -1,15 +1,30 @@
-import React from 'react';
-import ImageInfoStyles from './styles/modalWindow';
+import React from "react";
+import { ImageInfoStyles } from "./styles/ModalStyles";
 
-const ModalWindow = ({activeIndex, goBack, goToNext, goToPrev, firstName,lastName,userName,unsplashProfile,altImage, srcImage, locationName, locationPosition}) => {
-  const showLocation = locationName ? 'active' : '';
-  const showPrevButton = activeIndex === 0 ? 'hidden' : '';
-  const showNextButton = activeIndex === 9 ? 'hidden' : '';
+const ModalWindow = ({
+  activeIndex,
+  goBack,
+  goToNext,
+  goToPrev,
+  firstName,
+  lastName,
+  userName,
+  unsplashProfile,
+  altImage,
+  srcImage,
+  locationName,
+  locationPosition,
+}) => {
+  const showLocation = locationName ? "active" : "";
+  const showPrevButton = activeIndex === 0 ? "hidden" : "";
+  const showNextButton = activeIndex === 9 ? "hidden" : "";
 
   return (
-    <ImageInfoStyles onClick={(e)=> e.stopPropagation()}>
+    <ImageInfoStyles onClick={(e) => e.stopPropagation()}>
       <div className="authorInfo--container">
-        <a href={unsplashProfile}>{`${firstName} ${lastName?lastName:''}`}</a>
+        <a href={unsplashProfile}>{`${firstName} ${
+          lastName ? lastName : ""
+        }`}</a>
         <a href={unsplashProfile}>{`@${userName}`}</a>
       </div>
       <div className="picture--container">
@@ -17,7 +32,11 @@ const ModalWindow = ({activeIndex, goBack, goToNext, goToPrev, firstName,lastNam
       </div>
       <div className={`placeInfo--container ${showLocation}`}>
         <p>{locationName}</p>
-        <a href={`https://www.google.com/maps/search/?api=1&query=${locationPosition.latitude},${locationPosition.longitude}`}>Google Maps</a>
+        <a
+          href={`https://www.google.com/maps/search/?api=1&query=${locationPosition.latitude},${locationPosition.longitude}`}
+        >
+          Google Maps
+        </a>
       </div>
       <div className="buttons--container">
         <div className={`${showPrevButton}`}>

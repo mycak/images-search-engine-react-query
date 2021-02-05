@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Router, Switch } from "react-router-dom";
-import history from "../history";
+import history from "../utils/history";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 import listImages from "../pages/listImages";

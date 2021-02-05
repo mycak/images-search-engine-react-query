@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import SearchBar from "../components/SearchBar";
+import Searchbar from "../components/Searchbar";
 import bg1 from "../assets/images/bg1.jpg";
 
 const SiteContainer = styled.div`
@@ -17,7 +17,7 @@ const SiteContainer = styled.div`
 const MainSite = () => {
   return (
     <SiteContainer>
-      <SearchBar />
+      <Searchbar />
     </SiteContainer>
   );
 };
