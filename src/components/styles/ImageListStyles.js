@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const ImageListStyles = styled.div`
-  width: 98%;
-  margin: 1em auto 1em auto;
+  width: 99.5%;
+  margin: 0.5em auto 1em auto;
   text-align: center;
   .picture--container img {
     width: 100%;

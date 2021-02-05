@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import Searchbar from "../components/Searchbar";
-import bg1 from "../assets/images/bg1.jpg";
+import bg from "../assets/images/bg1.jpeg";
 
 const SiteContainer = styled.div`
-  background-image: url(${bg1});
+  background-image: url(${bg});
   background-position: center;
   background-size: cover;
   min-height: 100vh;

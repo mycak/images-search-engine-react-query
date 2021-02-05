@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import bg1 from "../assets/images/bg1.jpg";
+import bg from "../assets/images/bg2.jpeg";
 import ImageList from "../components/ImageList";
 import Searchbar from "../components/Searchbar";
 
@@ -17,7 +17,7 @@ const SearchbarSectionStyles = styled.div`
   align-items: center;
   width: 100%;
   min-height: 40vh;
-  background-image: url(${bg1});
+  background-image: url(${bg});
   background-size: cover;
 `;
 

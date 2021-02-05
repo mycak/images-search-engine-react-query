@@ -5,9 +5,10 @@ import {
   ImageInfoStyles,
   ButtonNext,
   ButtonPrev,
-  ButtonsContainer,
+  ButtonBack,
   PlaceInfoContainer,
   PictureContainer,
+  AuthorInfoContainer,
 } from "./styles/ModalStyles";
 
 const ModalImage = ({ imagesData, currentId, closeModal }) => {
@@ -31,12 +32,14 @@ const ModalImage = ({ imagesData, currentId, closeModal }) => {
           activeIndex={activeIndex}
           onClick={(e) => e.stopPropagation()}
         >
-          <a href={data.data.user.links.html}>{`${data.data.user.first_name} ${
-            data.data.user.last_name ? data.data.user.last_name : ""
-          }`}</a>
-          <a
-            href={data.data.user.links.html}
-          >{`@${data.data.user.first_name}`}</a>
+          <AuthorInfoContainer>
+            <a href={data.data.user.links.html}>{`${
+              data.data.user.first_name
+            } ${data.data.user.last_name ? data.data.user.last_name : ""}`}</a>
+            <a
+              href={data.data.user.links.html}
+            >{`@${data.data.user.first_name}`}</a>
+          </AuthorInfoContainer>
           <PictureContainer>
             <img alt={data.data.alt_description} src={data.data.urls.regular} />
           </PictureContainer>
@@ -48,23 +51,21 @@ const ModalImage = ({ imagesData, currentId, closeModal }) => {
               Google Maps
             </a>
           </PlaceInfoContainer>
-          <ButtonsContainer>
-            <ButtonPrev
-              activeIndex={activeIndex}
-              data-direction="prev"
-              onClick={goTo}
-            >
-              Go to prev
-            </ButtonPrev>
-            <button onClick={closeModal}>Go back</button>
-            <ButtonNext
-              activeIndex={activeIndex}
-              data-direction="next"
-              onClick={goTo}
-            >
-              Go to next
-            </ButtonNext>
-          </ButtonsContainer>
+          <ButtonPrev
+            activeIndex={activeIndex}
+            data-direction="prev"
+            onClick={goTo}
+          >
+            Go to prev
+          </ButtonPrev>
+          <ButtonBack onClick={closeModal}>Go back</ButtonBack>
+          <ButtonNext
+            activeIndex={activeIndex}
+            data-direction="next"
+            onClick={goTo}
+          >
+            Go to next
+          </ButtonNext>
         </ImageInfoStyles>
       )}
       {isLoading && <p>Loading...</p>}
