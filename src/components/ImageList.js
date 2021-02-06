@@ -28,8 +28,13 @@ const ImageList = ({ query, id }) => {
   }, [data, id, isModalOpen]);
 
   const onClick = (e) => {
-    setIsModalOpen(true);
     setCurrentId(e.target.dataset.id);
+    setIsModalOpen(true);
+    history.push(
+      `/pictures/${query}/${
+        data.data.results[parseInt(e.target.dataset.id)].id
+      }`
+    );
   };
   return (
     <>

@@ -18,9 +18,7 @@ import {
 const ModalImage = ({ imagesData, currentId, mainQuery, id, closeModal }) => {
   const [activeIndex, seActiveIndex] = useState(parseInt(currentId));
   const query = imagesData[activeIndex].id;
-
   const { isLoading, error, data } = useQuery(query, () => {
-    history.push(`/pictures/${mainQuery}/${query}`);
     return unsplash.get(`/photos/${query}`);
   });
 
@@ -28,8 +26,10 @@ const ModalImage = ({ imagesData, currentId, mainQuery, id, closeModal }) => {
     const direction = e.target.parentElement.dataset.direction;
     if (direction === "next" && activeIndex !== 9) {
       seActiveIndex((prevState) => prevState + 1);
+      history.push(`/pictures/${mainQuery}/${imagesData[activeIndex + 1].id}`);
     } else if (activeIndex !== 0 && direction === "prev") {
       seActiveIndex((prevState) => prevState - 1);
+      history.push(`/pictures/${mainQuery}/${imagesData[activeIndex - 1].id}`);
     }
   };
 
