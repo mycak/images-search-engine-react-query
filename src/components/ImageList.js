@@ -5,25 +5,34 @@ import ModalImage from "./ModalImage";
 import Masonry from "react-masonry-css";
 import Modal from "react-modal";
 import history from "../utils/history";
-import { ImageListStyles, AddMoreButton } from "./styles/ImageListStyles";
+import {
+  ImageListStyles,
+  AddMoreButton,
+  ModalIcon,
+} from "./styles/ImageListStyles";
 import { customStyles } from "./styles/ModalStyles";
+import iconPagination from "../assets/images/pagination.svg";
 Modal.setAppElement("#modal");
 
 const ImageList = ({ query, id }) => {
   const [multiplier, setMultiplier] = useState(1);
 
-  const { isLoading, error, data } = useQuery([query, multiplier], async () => {
-    let data = [];
-    let newData = [];
-    for (let i = 1; i <= multiplier; i++) {
-      newData = await unsplash.get("/search/photos/", {
-        params: { query, page: i },
-      });
-      data = [...data, ...newData.data.results];
-    }
+  const { isLoading, error, data } = useQuery(
+    [query, multiplier],
+    async () => {
+      let data = [];
+      let newData = [];
+      for (let i = 1; i <= multiplier; i++) {
+        newData = await unsplash.get("/search/photos/", {
+          params: { query, page: i },
+        });
+        data = [...data, ...newData.data.results];
+      }
 
-    return data;
-  });
+      return data;
+    },
+    { keepPreviousData: true }
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentId, setCurrentId] = useState(null);
 
@@ -94,7 +103,9 @@ const ImageList = ({ query, id }) => {
               imagesData={data}
             ></ModalImage>
           </Modal>
-          <AddMoreButton onClick={addMoreImages}>Add More</AddMoreButton>
+          <AddMoreButton onClick={addMoreImages}>
+            <ModalIcon src={iconPagination} alt="exit" />
+          </AddMoreButton>
         </ImageListStyles>
       )}
       {isLoading && <p>Loading...</p>}

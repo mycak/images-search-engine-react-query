@@ -24,5 +24,12 @@ export const ImageListStyles = styled.div`
   }
 `;
 export const AddMoreButton = styled.button`
-  border: solid red;
+  cursor: pointer;
+  border: none;
+  margin-top: 1em;
+  width: 2em;
+  transform: rotate(90deg);
+`;
+export const ModalIcon = styled.img`
+  width: 100%;
 `;
