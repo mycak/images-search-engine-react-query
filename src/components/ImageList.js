@@ -42,7 +42,7 @@ const ImageList = ({ query, id }) => {
         <ImageListStyles>
           {!data.data.results.length && <p> No results.</p>}
           <Masonry
-            breakpointCols={{ 300: 1, 700: 2, 950: 3 }}
+            breakpointCols={{ default: 3, 420: 1, 980: 2 }}
             className="my-masonry-grid"
             columnClassName="my-masonry-grid_column"
           >

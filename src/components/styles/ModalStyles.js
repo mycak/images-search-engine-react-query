@@ -13,25 +13,36 @@ export const customStyles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-around",
-    padding: "0",
+    padding: ".8em 0 .8em 0",
     overflow: "visible",
+  },
+  overlay: {
+    backgroundColor: "rgba(0,0,0,.6)",
   },
 };
 
 export const ImageInfoStyles = styled.div`
   background-color: #fff;
   overflow-y: auto;
-  font-size: 10px;
+  font-size: 0.9em;
   display: flex;
   flex-direction: column;
   align-items: center;
   button {
-    font-size: 10px;
+    position: fixed;
+    background-color: transparent;
+    cursor: pointer;
+    filter: brightness(0) invert(1);
+    border: none;
+  }
+  @media screen and (max-width: 600px) {
+    font-size: 0.8em;
   }
 `;
 
 export const AuthorInfoContainer = styled.div`
   display: flex;
+  gap: 0.2em;
 `;
 
 export const PictureContainer = styled.div`
@@ -40,43 +51,48 @@ export const PictureContainer = styled.div`
     height: auto;
     width: 100%;
   }
+  @media screen and (max-width: 980px) {
+    width: 90%;
+  }
 `;
 export const PlaceInfoContainer = styled.div`
   display: flex;
+  gap: 0.2em;
   visibility: ${({ location }) => (location ? "visible" : "hidden")};
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+    padding: 0 1em 0 1em;
+  }
 `;
 export const ButtonPrev = styled.button`
-  position: fixed;
-  background-color: transparent;
-  border: none;
   top: 50%;
   right: 100%;
-  width: 6em;
+  width: 2em;
   transform: translateY(-50%) rotate(180deg);
-  visibility: ${({ activeIndex }) =>
-    activeIndex === 0 ? "hidden" : "visible"};
+  visibility: ${({ first }) => (first ? "hidden" : "visible")};
 `;
 export const ButtonNext = styled.button`
-  position: fixed;
-  background-color: transparent;
-  border: none;
   top: 50%;
   left: 100%;
-  width: 6em;
+  width: 2em;
   transform: translateY(-50%);
-  visibility: ${({ activeIndex }) =>
-    activeIndex === 9 ? "hidden" : "visible"};
+  visibility: ${({ isLast }) => (isLast ? "hidden" : "visible")};
 `;
 
 export const ButtonBack = styled.button`
-  position: fixed;
-  top: 0;
-  left: 100%;
-  width: 3em;
+  top: -1%;
+  left: 101%;
+  width: 1em;
   background-color: transparent;
-  border: none;
 `;
 
 export const ModalIcon = styled.img`
   width: 100%;
+`;
+
+export const SpanLink = styled.span`
+  a {
+    font-size: 0.7em;
+    color: #a0a0a0;
+  }
 `;

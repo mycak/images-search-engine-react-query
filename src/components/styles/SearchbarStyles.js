@@ -3,18 +3,20 @@ import styled from "styled-components";
 export const FormStyles = styled.form`
   width: 60%;
   input[type="search"] {
-    font-size: 1em;
     padding: 5px;
     width: 100%;
-    border-radius: 4px;
+    border-radius: 2px;
     border: none;
   }
   input[type="search"]::placeholder {
-    font-size: clamp(12px, 2vw, 20px);
+    font-size: 1em;
   }
   input[type="search"]:focus {
     border: none;
     outline: none;
+  }
+  @media screen and (max-width: 480px) {
+    width: 80%;
   }
 `;
 
@@ -22,13 +24,12 @@ export const ListStyles = styled.ul`
   position: absolute;
   margin-top: 3px;
   background-color: #fff;
-  border-radius: 4px;
+  border-radius: 2px;
   list-style: none;
   width: inherit;
   li,
   p {
-    font-size: clamp(12px, 2vw, 20px);
-    padding: 2px;
+    padding: 2px 0 2px 5px;
     color: #929296;
     &:hover,
     &.active {

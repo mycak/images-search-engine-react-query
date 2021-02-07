@@ -25,5 +25,6 @@ a {
 a {
   text-decoration: none;
 }
+
 `;
 export default GlobalStyles;
