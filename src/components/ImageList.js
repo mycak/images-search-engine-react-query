@@ -5,25 +5,39 @@ import ModalImage from "./ModalImage";
 import Masonry from "react-masonry-css";
 import Modal from "react-modal";
 import history from "../utils/history";
-import { ImageListStyles } from "./styles/ImageListStyles";
+import { ImageListStyles, AddMoreButton } from "./styles/ImageListStyles";
 import { customStyles } from "./styles/ModalStyles";
 Modal.setAppElement("#modal");
 
 const ImageList = ({ query, id }) => {
-  const { isLoading, error, data } = useQuery(query, () =>
-    unsplash.get("/search/photos/", {
-      params: { query },
-    })
-  );
+  const [multiplier, setMultiplier] = useState(1);
+
+  const { isLoading, error, data } = useQuery([query, multiplier], async () => {
+    let data = [];
+    let newData = [];
+    for (let i = 1; i <= multiplier; i++) {
+      newData = await unsplash.get("/search/photos/", {
+        params: { query, page: i },
+      });
+      data = [...data, ...newData.data.results];
+    }
+
+    return data;
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentId, setCurrentId] = useState(null);
 
   useEffect(() => {
     if (data && id && !isModalOpen) {
-      const results = data.data.results;
+      const results = data;
       const index = results.map((item) => item.id).indexOf(id);
-      setCurrentId(index);
-      setIsModalOpen(true);
+      if (index !== -1) {
+        setCurrentId(index);
+        setIsModalOpen(true);
+      } else {
+        setCurrentId(10);
+        setIsModalOpen(true);
+      }
     }
   }, [data, id, isModalOpen]);
 
@@ -31,22 +45,23 @@ const ImageList = ({ query, id }) => {
     setCurrentId(e.target.dataset.id);
     setIsModalOpen(true);
     history.push(
-      `/pictures/${query}/${
-        data.data.results[parseInt(e.target.dataset.id)].id
-      }`
+      `/pictures/${query}/${data[parseInt(e.target.dataset.id)].id}`
     );
+  };
+  const addMoreImages = () => {
+    setMultiplier((prevState) => prevState + 1);
   };
   return (
     <>
       {data && (
         <ImageListStyles>
-          {!data.data.results.length && <p> No results.</p>}
+          {!data.length && <p> No results.</p>}
           <Masonry
             breakpointCols={{ default: 3, 420: 1, 980: 2 }}
             className="my-masonry-grid"
             columnClassName="my-masonry-grid_column"
           >
-            {data.data.results.map((image, i) => {
+            {data.map((image, i) => {
               return (
                 <div className="picture--container" key={i}>
                   <img
@@ -76,9 +91,10 @@ const ImageList = ({ query, id }) => {
                 setIsModalOpen(false);
               }}
               currentId={currentId}
-              imagesData={data.data.results}
+              imagesData={data}
             ></ModalImage>
           </Modal>
+          <AddMoreButton onClick={addMoreImages}>Add More</AddMoreButton>
         </ImageListStyles>
       )}
       {isLoading && <p>Loading...</p>}

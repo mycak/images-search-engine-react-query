@@ -18,10 +18,12 @@ import {
 
 const ModalImage = ({ imagesData, currentId, mainQuery, id, closeModal }) => {
   const [activeIndex, seActiveIndex] = useState(parseInt(currentId));
-  const query = imagesData[activeIndex].id;
+  const query = parseInt(currentId) !== 10 ? imagesData[activeIndex].id : id;
   const isFirstInArray = activeIndex === 0 ? true : false;
-  const isLastInArray = activeIndex === imagesData.length - 1 ? true : false;
-  console.log(isFirstInArray, isLastInArray);
+  const isLastInArray =
+    activeIndex === imagesData.length - 1 || activeIndex === imagesData.length
+      ? true
+      : false;
 
   const { isLoading, error, data } = useQuery(query, () => {
     return unsplash.get(`/photos/${query}`);

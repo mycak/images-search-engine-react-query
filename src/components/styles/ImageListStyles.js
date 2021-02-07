@@ -23,3 +23,6 @@ export const ImageListStyles = styled.div`
     margin-bottom: -2px;
   }
 `;
+export const AddMoreButton = styled.button`
+  border: solid red;
+`;

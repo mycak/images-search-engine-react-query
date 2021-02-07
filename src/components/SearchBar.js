@@ -13,7 +13,9 @@ const Searchbar = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    history.push(`/pictures/${inputValue}`);
+    if (inputValue) {
+      history.push(`/pictures/${inputValue}`);
+    }
   };
   const onChange = (e) => {
     setActiveSuggestion(0);
