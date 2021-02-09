@@ -13,10 +13,10 @@ const Searchbar = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setInputValue('');
     if (inputValue) {
       history.push(`/pictures/${inputValue}`);
     }
-    setInputValue('');
   };
   const onChange = (e) => {
     setActiveSuggestion(0);
@@ -31,8 +31,8 @@ const Searchbar = () => {
   const onClick = (e) => {
     e.preventDefault();
     setShowSuggestions(false);
-    history.push(`/pictures/${e.currentTarget.innerText}`);
     setInputValue('');
+    history.push(`/pictures/${e.currentTarget.innerText}`);
   };
   const onKeyDown = (e) => {
     // Enter

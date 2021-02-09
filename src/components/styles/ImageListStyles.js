@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ImageListStyles = styled.div`
   width: 99.5%;
@@ -26,10 +26,9 @@ export const ImageListStyles = styled.div`
 export const AddMoreButton = styled.button`
   cursor: pointer;
   border: none;
-  margin-top: 1em;
   width: 2em;
-  transform: rotate(90deg);
 `;
 export const ModalIcon = styled.img`
   width: 100%;
+  height: auto;
 `;

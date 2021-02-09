@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import unsplash from "../api/unsplash";
-import { useQuery } from "react-query";
-import ModalImage from "./ModalImage";
-import Masonry from "react-masonry-css";
-import Modal from "react-modal";
-import history from "../utils/history";
+import React, { useEffect, useState } from 'react';
+import unsplash from '../api/unsplash';
+import { useQuery } from 'react-query';
+import ModalImage from './ModalImage';
+import Masonry from 'react-masonry-css';
+import Modal from 'react-modal';
+import history from '../utils/history';
 import {
   ImageListStyles,
   AddMoreButton,
   ModalIcon,
-} from "./styles/ImageListStyles";
-import { customStyles } from "./styles/ModalStyles";
-import iconPagination from "../assets/images/pagination.svg";
-Modal.setAppElement("#modal");
+} from './styles/ImageListStyles';
+import { customStyles } from './styles/ModalStyles';
+import arrowDown from '../assets/images/arrowDown.svg';
+Modal.setAppElement('#modal');
 
 const ImageList = ({ query, id }) => {
   const [multiplier, setMultiplier] = useState(1);
@@ -23,7 +23,7 @@ const ImageList = ({ query, id }) => {
       let data = [];
       let newData = [];
       for (let i = 1; i <= multiplier; i++) {
-        newData = await unsplash.get("/search/photos/", {
+        newData = await unsplash.get('/search/photos/', {
           params: { query, page: i },
         });
         data = [...data, ...newData.data.results];
@@ -104,7 +104,7 @@ const ImageList = ({ query, id }) => {
             ></ModalImage>
           </Modal>
           <AddMoreButton onClick={addMoreImages}>
-            <ModalIcon src={iconPagination} alt="exit" />
+            <ModalIcon src={arrowDown} alt="exit" />
           </AddMoreButton>
         </ImageListStyles>
       )}
