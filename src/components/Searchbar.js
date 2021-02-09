@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { countryList } from "../utils/suggestionslist";
-import SuggestionsList from "./SuggestionList";
-import history from "../utils/history";
-import { FormStyles } from "./styles/SearchbarStyles";
+import React, { useState } from 'react';
+import { countryList } from '../utils/suggestionslist';
+import SuggestionsList from './SuggestionList';
+import history from '../utils/history';
+import { FormStyles } from './styles/SearchbarStyles';
 
 const Searchbar = () => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState('');
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const suggestions = countryList.map((item) => item.toLocaleLowerCase());
 
@@ -16,6 +16,7 @@ const Searchbar = () => {
     if (inputValue) {
       history.push(`/pictures/${inputValue}`);
     }
+    setInputValue('');
   };
   const onChange = (e) => {
     setActiveSuggestion(0);
@@ -31,6 +32,7 @@ const Searchbar = () => {
     e.preventDefault();
     setShowSuggestions(false);
     history.push(`/pictures/${e.currentTarget.innerText}`);
+    setInputValue('');
   };
   const onKeyDown = (e) => {
     // Enter
@@ -66,7 +68,7 @@ const Searchbar = () => {
         type="search"
         value={inputValue}
         onChange={onChange}
-        placeholder={"Search for images !"}
+        placeholder={'Search for images !'}
         onKeyDown={onKeyDown}
       />
       <SuggestionsList
