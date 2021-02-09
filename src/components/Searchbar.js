@@ -13,9 +13,9 @@ const Searchbar = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setInputValue('');
     if (inputValue) {
       history.push(`/pictures/${inputValue}`);
+      setInputValue('');
     }
   };
   const onChange = (e) => {
