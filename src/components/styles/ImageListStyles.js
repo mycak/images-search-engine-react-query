@@ -5,6 +5,7 @@ export const ImageListStyles = styled.div`
   margin: 0.5em auto 1em auto;
   text-align: center;
   .picture--container img {
+    cursor: pointer;
     width: 100%;
     height: auto;
   }
