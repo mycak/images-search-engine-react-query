@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import bg from "../assets/images/bg2.jpeg";
-import ImageList from "../components/ImageList";
-import Searchbar from "../components/Searchbar";
+import React from 'react';
+import styled from 'styled-components';
+import bg from '../assets/images/bg2.jpeg';
+import ImageList from '../components/ImageList';
+import Searchbar from '../components/Searchbar';
 
 const SiteContainer = styled.div`
   display: flex;
@@ -27,7 +27,7 @@ const ListImagesSite = ({ match }) => {
   return (
     <SiteContainer>
       <SearchbarSectionStyles>
-        <Searchbar />
+        <Searchbar query={query} />
       </SearchbarSectionStyles>
       <ImageList query={query} id={id} />
     </SiteContainer>

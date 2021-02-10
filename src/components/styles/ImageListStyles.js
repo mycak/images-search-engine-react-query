@@ -24,9 +24,14 @@ export const ImageListStyles = styled.div`
   }
 `;
 export const AddMoreButton = styled.button`
+  background-color: transparent;
+  visibility: ${({ isMore }) => (isMore ? 'visible' : 'hidden')};
   cursor: pointer;
   border: none;
   width: 2em;
+  &:active {
+    background-color: transparent;
+  }
 `;
 export const ModalIcon = styled.img`
   width: 100%;

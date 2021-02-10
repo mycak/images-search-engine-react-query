@@ -103,7 +103,10 @@ const ImageList = ({ query, id }) => {
               imagesData={data}
             ></ModalImage>
           </Modal>
-          <AddMoreButton onClick={addMoreImages}>
+          <AddMoreButton
+            onClick={addMoreImages}
+            isMore={data.length % 10 === 0 ? true : false}
+          >
             <ModalIcon src={arrowDown} alt="exit" />
           </AddMoreButton>
         </ImageListStyles>

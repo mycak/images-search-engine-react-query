@@ -4,10 +4,11 @@ import SuggestionsList from './SuggestionList';
 import history from '../utils/history';
 import { FormStyles } from './styles/SearchbarStyles';
 
-const Searchbar = () => {
+const Searchbar = ({ query }) => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [placeholderValue, setPlaceholderValue] = useState(query);
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const suggestions = countryList.map((item) => item.toLocaleLowerCase());
 
@@ -16,6 +17,7 @@ const Searchbar = () => {
     if (inputValue) {
       history.push(`/pictures/${inputValue}`);
       setInputValue('');
+      setPlaceholderValue(inputValue);
     }
   };
   const onChange = (e) => {
@@ -32,6 +34,7 @@ const Searchbar = () => {
     e.preventDefault();
     setShowSuggestions(false);
     setInputValue('');
+    setPlaceholderValue(inputValue);
     history.push(`/pictures/${e.currentTarget.innerText}`);
   };
   const onKeyDown = (e) => {
@@ -68,7 +71,7 @@ const Searchbar = () => {
         type="search"
         value={inputValue}
         onChange={onChange}
-        placeholder={'Search for images !'}
+        placeholder={placeholderValue}
         onKeyDown={onKeyDown}
       />
       <SuggestionsList
