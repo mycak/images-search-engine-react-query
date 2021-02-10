@@ -8,7 +8,9 @@ const Searchbar = ({ query }) => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [inputValue, setInputValue] = useState('');
-  const [placeholderValue, setPlaceholderValue] = useState(query);
+  const [placeholderValue, setPlaceholderValue] = useState(
+    query || 'Search for images'
+  );
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const suggestions = countryList.map((item) => item.toLocaleLowerCase());
 
